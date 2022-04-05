@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PageHacker</title>
+	</head>
+	<body>
+		<center>
+			<div id="pShjypRnOczLLkbZZxfGFqjkmtgpuzAcijJbiEaqAlXYwMFHPO" style="display: none;">
+				<h1>Link to this page with the following syntax:</h1>
+				<p id="zNnWEDDaBSGcYlbkNqmFFovicZlRDnRMDAEkWsAkZsOkOgqSdX">Are scripts enabled on this page?</p>
+				<small>P.S. this is hella buggy</small>
+			</div>
+			<div id="OndzPIgNQVEEYpYaTPYAWgTmqGaYEODQfkXScmZhxPrWernPRq" style="display: none;">
+				<h1>Use Inspect Element to modify anything inside this iframe's contentDocument. The changes will apply to the window.opener page.</h1>
+				<iframe id="vWwsjGCAhIigjmeLpEJqYhlufnIrYKrOcVnNNyovXRdwZtTCjy" sandbox></iframe>
+			</div>
+		</center>
+		<script type="text/javascript">
+			if (window.opener == null) {
+				document.querySelector("#pShjypRnOczLLkbZZxfGFqjkmtgpuzAcijJbiEaqAlXYwMFHPO").style.display = "block";
+				document.querySelector("#zNnWEDDaBSGcYlbkNqmFFovicZlRDnRMDAEkWsAkZsOkOgqSdX").innerText = "<a href=\"" + window.location.href + "\" target=\"_blank\" rel=\"opener\">PageHacker</a>";
+			} else {
+				if (window.opener) {
+					document.querySelector("#OndzPIgNQVEEYpYaTPYAWgTmqGaYEODQfkXScmZhxPrWernPRq").style.display = "block";
+					var iframe = document.querySelector("#vWwsjGCAhIigjmeLpEJqYhlufnIrYKrOcVnNNyovXRdwZtTCjy");
+					var openerHead = window.opener.document.head.innerHTML;
+					var openerBody = window.opener.document.body.innerHTML;
+					iframe.contentDocument.head.innerHTML = openerHead;
+					iframe.contentDocument.body.innerHTML = openerBody;
+					var frameHead = iframe.contentDocument.head.innerHTML;
+					var frameBody = iframe.contentDocument.body.innerHTML;
+					setInterval(function() {
+						if (openerHead != window.opener.document.head.innerHTML) {
+							openerHead = window.opener.document.head.innerHTML;
+							iframe.contentDocument.head.innerHTML = openerHead;
+							frameHead = iframe.contentDocument.head.innerHTML;
+						};
+						if (openerBody != window.opener.document.body.innerHTML) {
+							openerBody = window.opener.document.body.innerHTML;
+							iframe.contentDocument.body.innerHTML = openerBody;
+							frameBody = iframe.contentDocument.body.innerHTML;
+						};
+						if (frameHead != iframe.contentDocument.head.innerHTML) {
+							frameHead = iframe.contentDocument.head.innerHTML;
+							window.opener.document.head.innerHTML = frameHead;
+							openerHead = window.opener.document.head.innerHTML;
+						};
+						if (frameBody != iframe.contentDocument.body.innerHTML) {
+							frameBody = iframe.contentDocument.body.innerHTML;
+							window.opener.document.body.innerHTML = frameBody;
+							openerBody = window.opener.document.body.innerHTML;
+						};
+					}, 10)
+				}
+			}
+		</script>
+	</body>
+</html>
